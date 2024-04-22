@@ -21,15 +21,14 @@ This application has been implemented using Spring Boot and Gradle. The applicat
 3. Run the following command to start the application:
 
 ```bash
-bashCopy code
 ./gradlew bootRun
 
 ```
 
 1. The application will start on port 8080.
-2. Access the Swagger UI at http://localhost:8080/ to explore the available endpoints.
+2. Access the Swagger UI at http://localhost:8080/ to explore the available endpoint.
 
-## **Docker Support**
+## **Running the Application with Docker**
 
 To run the application in a Docker container:
 
@@ -37,7 +36,6 @@ To run the application in a Docker container:
 2. Execute the **`start.sh`** script:
 
 ```bash
-bashCopy code
 ./start.sh
 
 ```
@@ -45,7 +43,6 @@ bashCopy code
 1. To stop and remove the Docker container, execute the **`stop.sh`** script:
 
 ```bash
-bashCopy code
 ./stop.sh
 
 ```
@@ -57,7 +54,6 @@ This application is thoroughly tested using both unit tests and integration test
 1. To run all tests, execute the following command:
 
 ```bash
-bashCopy code
 ./gradlew test
 
 ```
