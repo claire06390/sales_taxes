@@ -5,14 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.example.sales_taxes.utils.RouteConstants.ROOT_ROUTE;
+
 @Slf4j
 @Controller
-@RequestMapping("/")
+@RequestMapping(ROOT_ROUTE)
 public class SwaggerHomeController {
 
     @GetMapping
     public String index() {
-        log.info("Redirect to : /swagger-ui/index.html");
         return "redirect:/swagger-ui/index.html";
     }
 

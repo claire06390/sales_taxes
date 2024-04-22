@@ -24,11 +24,10 @@ public class RestExceptionHandler {
         return createResponseEntity(apiError, httpStatus);
     }
 
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleMethodNotValidException(MethodArgumentNotValidException e) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-        ApiError apiError = new ApiError(String.format("The purchase don't have the good format  : %s", e.getMessage()));
+        ApiError apiError = new ApiError("The purchase cannot be null or empty");
         apiError.setStatus(httpStatus);
         return createResponseEntity(apiError, httpStatus);
     }

@@ -7,5 +7,7 @@ import lombok.NoArgsConstructor;
 public class RouteConstants {
     public static final String BASE_PURCHASE_ROUTE = "/purchase";
 
+    public static final String ROOT_ROUTE = "/";
+
 
 }

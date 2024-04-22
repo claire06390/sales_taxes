@@ -16,6 +16,6 @@ import static com.example.sales_taxes.utils.Constant.STRING_TYPE;
 public class PurchaseDtoIn {
 
     @NotEmpty
-    @Schema(name = "purchases", description = "List of items purchased", type = STRING_TYPE, example = "1 book a t 12.49 1 music CD a t 14.99")
+    @Schema(name = "purchases", description = "List of items purchased", type = STRING_TYPE, example = "1 book at 12.49\n1 music CD at 14.99")
     private String purchases;
 }

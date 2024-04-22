@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,6 @@ public interface PurchaseControllerDeclaration {
             @ApiResponse(responseCode = "400", description = "Purchase information incorrect"),
     })
     ResponseEntity<String> makePurchase(@Parameter(in = ParameterIn.DEFAULT, description = "List of items purchased", required = true)
-                                      @RequestBody PurchaseDtoIn purchases);
+                                      @RequestBody @Valid PurchaseDtoIn purchases);
 
 }
