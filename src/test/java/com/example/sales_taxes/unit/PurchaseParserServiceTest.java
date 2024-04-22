@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
+import static com.example.sales_taxes.utils.Constant.EMPTY_STRING;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -60,7 +61,7 @@ class PurchaseParserServiceTest {
     @Test
     void parseAndCheckPurchases_InvalidInput_ThrowsBadRequestException() {
         // Given
-        String purchases = "invalid input";
+        String purchases = EMPTY_STRING;
 
         // When/Then
         assertThrows(BadRequestException.class, () -> purchaseParserService.parseAndCheckPurchases(purchases));

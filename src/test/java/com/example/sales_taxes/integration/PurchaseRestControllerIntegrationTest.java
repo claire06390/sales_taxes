@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static com.example.sales_taxes.utils.Constant.EMPTY_STRING;
+import static com.example.sales_taxes.utils.RouteConstants.BASE_PURCHASE_ROUTE;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.Matchers.containsString;
@@ -37,7 +39,7 @@ public class PurchaseRestControllerIntegrationTest {
         String requestBody = objectMapper.writeValueAsString(purchaseDto);
 
         // When
-        MvcResult mvcResult = mockMvc.perform(post("/purchase")
+        MvcResult mvcResult = mockMvc.perform(post(BASE_PURCHASE_ROUTE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -58,7 +60,7 @@ public class PurchaseRestControllerIntegrationTest {
         String requestBody = objectMapper.writeValueAsString(purchaseDto);
 
         // When
-        MvcResult mvcResult = mockMvc.perform(post("/purchase")
+        MvcResult mvcResult = mockMvc.perform(post(BASE_PURCHASE_ROUTE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -79,7 +81,7 @@ public class PurchaseRestControllerIntegrationTest {
         String requestBody = objectMapper.writeValueAsString(purchaseDto);
 
         // When
-        MvcResult mvcResult = mockMvc.perform(post("/purchase")
+        MvcResult mvcResult = mockMvc.perform(post(BASE_PURCHASE_ROUTE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -98,11 +100,11 @@ public class PurchaseRestControllerIntegrationTest {
     @Test
     public void makePurchase_InvalidInput_Returns400() throws Exception {
         // Given
-        PurchaseDtoIn purchaseDto = new PurchaseDtoIn("");
+        PurchaseDtoIn purchaseDto = new PurchaseDtoIn(EMPTY_STRING);
         String requestBody = objectMapper.writeValueAsString(purchaseDto);
 
         // When
-        mockMvc.perform(post("/purchase")
+        mockMvc.perform(post(BASE_PURCHASE_ROUTE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isBadRequest());
@@ -116,7 +118,7 @@ public class PurchaseRestControllerIntegrationTest {
         String requestBody = objectMapper.writeValueAsString(purchaseDto);
 
         // When
-        mockMvc.perform(post("/purchase")
+        mockMvc.perform(post(BASE_PURCHASE_ROUTE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isBadRequest());

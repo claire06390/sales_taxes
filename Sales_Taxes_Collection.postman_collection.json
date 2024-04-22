@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "cdd9ac5b-5ae3-4919-8b42-cf7c429c58cb",
+		"name": "Sales_Taxes_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21626189"
+	},
+	"item": [
+		{
+			"name": "Valid Input 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"\r",
+							"pm.test(\"Test for input 1\", function () {\r",
+							"    pm.expect(responseBody).to.eql(\"1 book: 12.49\\n1 music CD: 16.49\\n1 chocolate bar: 0.85\\nSales Taxes: 1.50 Total: 29.83\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Valid input test return http status 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"purchases\" :\"1 book at 12.49\\n1 music CD at 14.99\\n1 chocolate bar at 0.85\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/purchase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"purchase"
+					]
+				},
+				"description": "This request represent the valid input 1"
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Input 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"pm.test(\"Test for input 2\", function () {\r",
+							"    pm.expect(responseBody).to.eql(\"1 imported box of chocolates: 10.50\\n1 imported bottle of perfume: 54.65\\nSales Taxes: 7.65 Total: 65.15\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Valid input test return http status 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"purchases\" :\"1 imported box of chocolates at 10.00\\n1 imported bottle of perfume at 47.50\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/purchase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Input 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"pm.test(\"Test for input 3\", function () {\r",
+							"    pm.expect(responseBody).to.eql(\"1 imported bottle of perfume: 32.19\\n1 bottle of perfume: 20.89\\n1 packet of headache pills: 9.75\\n1 imported box of chocolates: 11.85\\nSales Taxes: 6.70 Total: 74.68\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"purchases\" :\"1 imported bottle of perfume at 27.99 1 bottle of perfume at 18.99 1 packet of headache pills at 9.75 1 box of imported chocolates at 11.25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/purchase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Input ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"pm.test(\"Invalid input test return message error bad request\", function () {\r",
+							"    pm.expect(responseBody).to.include(\"BAD_REQUEST\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Invalid input test return http status 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"purchases\" :\"1 imported box of chocolates  10.00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/purchase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

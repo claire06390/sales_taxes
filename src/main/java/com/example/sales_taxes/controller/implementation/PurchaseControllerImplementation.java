@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.sales_taxes.controller.declaration.PurchaseControllerDeclaration;
 
-import static com.example.sales_taxes.utils.RouteConstants.ActionRoutes.BASE_PURCHASE_ROUTE;
+import static com.example.sales_taxes.utils.RouteConstants.BASE_PURCHASE_ROUTE;
 
 @RestController
 @RequiredArgsConstructor

@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.NONE) //Protected access
 public class RouteConstants {
-
-    public static class ActionRoutes {
-        public static final String BASE_PURCHASE_ROUTE = "/purchase";
-    }
+    public static final String BASE_PURCHASE_ROUTE = "/purchase";
 
 
 }
