@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface PurchaseControllerDeclaration {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Create a new action", responses = {
-            @ApiResponse(responseCode = "201", description = "The purchase was created successfully ans receipt detials was retuned"),
+    @Operation(summary = "Return receipt details of purchase", responses = {
+            @ApiResponse(responseCode = "200", description = "Receipt details was successfully retuned"),
             @ApiResponse(responseCode = "400", description = "Purchase information incorrect"),
     })
-    ResponseEntity<String> createPurchase(@Parameter(in = ParameterIn.DEFAULT, description = "List of items purchased", required = true)
+    ResponseEntity<String> makePurchase(@Parameter(in = ParameterIn.DEFAULT, description = "List of items purchased", required = true)
                                       @RequestBody PurchaseDtoIn purchases);
 
 }

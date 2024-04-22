@@ -15,6 +15,4 @@ public class PurchaseItem {
     private float price;
     private boolean imported;
     private CategoryEnum category;
-
-    // ADD GITHUB PIPELINE
 }

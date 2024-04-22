@@ -20,7 +20,8 @@ public class PurchaseItemClassifierService {
     public void init() {
         keywords.put("book", CategoryEnum.BOOK);
         keywords.put("chocolate", CategoryEnum.FOOD);
-        keywords.put("pill", CategoryEnum.MEDICAL_PRODUCT);
+        keywords.put("chocolates", CategoryEnum.FOOD);
+        keywords.put("pills", CategoryEnum.MEDICAL_PRODUCT);
     }
 
     public CategoryEnum getCategory(String name) {

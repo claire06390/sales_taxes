@@ -5,28 +5,25 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
-import static com.example.sales_taxes.utils.Constant.LINE_SEPARATOR;
+import static com.example.sales_taxes.utils.Constant.*;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ReceiptService {
-    @Value("${application.sales.tax.rate}")
-    private Float salesTaxRate;
-
-    @Value("${application.import.tax.rate}")
-    private Float importTaxRate;
-
-    @Value("${application.tax.rounded}")
-    private Float taxRounded;
 
     private final PurchaseParserService purchaseParserService;
+
 
     public String createReceipt(String purchases) {
         log.info("Creating receipt for purchases: {}", purchases);
         List<PurchaseItem> purchaseItems = purchaseParserService.parseAndCheckPurchases(purchases);
+        DecimalFormat df = createDecimalFormat();
 
         StringBuilder receiptBuilder = new StringBuilder();
 
@@ -34,37 +31,52 @@ public class ReceiptService {
         float totalAmount = 0.0f;
 
         for (PurchaseItem item : purchaseItems) {
+            log.info("Processing {} item: {} with the category: {}", item.getQuantity(), item.getName(), item.getCategory());
             float itemPrice = item.getPrice();
-            float salesTax = 0.0f;
-            if(item.getCategory().isExempt()) {
-                log.info("Item {} is exempt from sales tax", item.getName());
-            }else{
-                salesTax = calculateSalesTax(itemPrice, item.isImported());
-                log.info("Item {} is not exempt from sales tax and the taxe represent {}", item.getName(), salesTax);
-            }
-            float totalItemPrice = itemPrice + salesTax;
+            float taxes;
+            taxes= calculateTaxes(itemPrice, item.isImported(),item.getCategory().isExempt());
+            float totalItemPrice = item.getQuantity() *(itemPrice + taxes);
 
-            totalSalesTax += salesTax;
-            totalAmount += item.getQuantity() * totalItemPrice;
+            totalSalesTax += taxes;
+            totalAmount += totalItemPrice;
 
-            receiptBuilder.append(item.getName()).append(": ").append(totalItemPrice).append(LINE_SEPARATOR);
+            String importedPrefix = item.isImported() ? IMPORTED_PATTERN+SPACE : EMPTY_STRING;
+            String formattedItemPrice = df.format(totalItemPrice);
+            receiptBuilder.append(item.getQuantity())
+                    .append(SPACE)
+                    .append(importedPrefix)
+                    .append(item.getName())
+                    .append(COLON)
+                    .append(SPACE)
+                    .append(formattedItemPrice)
+                    .append(LINE_SEPARATOR);
+
         }
-        receiptBuilder.append("Sales Taxes: ").append(roundSalesTax(totalSalesTax)).append(" Total: ").append(totalAmount);
+        String formattedTotalSalesTax = df.format(roundSalesTax(totalSalesTax));
+        String formattedTotalAmount = df.format(totalAmount);
+        receiptBuilder.append("Sales Taxes: ").append(formattedTotalSalesTax).append(" Total: ").append(formattedTotalAmount);
         String receipt = receiptBuilder.toString();
         log.info("Created receipt: {}", receipt);
         return receipt;
     }
 
-    private float calculateSalesTax(float price, boolean isImported) {
-        float taxRate = salesTaxRate;
+    private DecimalFormat createDecimalFormat() {
+        DecimalFormatSymbols decimalFormatSymbols = DecimalFormatSymbols.getInstance();
+        decimalFormatSymbols.setDecimalSeparator('.');
+        return new DecimalFormat("0.00", decimalFormatSymbols);
+    }
+
+    private float calculateTaxes(float price, boolean isImported, boolean isExempt) {
+        float taxRate = isExempt ? 0.0f : SALES_TAX_RATE;
         if (isImported) {
-            taxRate += importTaxRate;
+            taxRate += IMPORT_TAX_RATE;
         }
         float salesTax = price * taxRate;
         return roundSalesTax(salesTax);
     }
 
+
     private float roundSalesTax(float salesTax) {
-        return (float) (Math.ceil(salesTax / taxRounded) * taxRounded);
+        return (float) (Math.ceil(salesTax / TAX_ROUNDED) * TAX_ROUNDED);
     }
 }

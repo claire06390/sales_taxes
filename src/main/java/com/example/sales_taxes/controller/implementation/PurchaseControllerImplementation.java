@@ -19,7 +19,7 @@ public class PurchaseControllerImplementation implements PurchaseControllerDecla
 
     private final ReceiptService receiptService;
 
-    public ResponseEntity<String> createPurchase(PurchaseDtoIn purchases) {
+    public ResponseEntity<String> makePurchase(PurchaseDtoIn purchases) {
         String receipt = receiptService.createReceipt(purchases.getPurchases());
         return ResponseEntity.ok(receipt);
     }
