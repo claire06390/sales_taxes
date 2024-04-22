@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  sales_taxes:
+    image: "sales_taxes:latest"
+    container_name: sales_taxes
+    ports:
+      - "8080:8080"
+    build:
+      context: .
