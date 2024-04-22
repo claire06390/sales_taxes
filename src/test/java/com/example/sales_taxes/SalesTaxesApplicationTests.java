@@ -10,4 +10,6 @@ class SalesTaxesApplicationTests {
     void contextLoads() {
     }
 
+    // TODO: Add tests
+
 }
