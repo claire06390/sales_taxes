@@ -10,7 +10,4 @@ public class BadRequestException extends CustomException {
         super(msg);
     }
 
-    public BadRequestException(String msg, Throwable e) {
-        super(msg, e);
-    }
 }

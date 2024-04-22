@@ -9,5 +9,5 @@ public enum CategoryEnum {
 
     FOOD(true),BOOK(true),MEDICAL_PRODUCT(true),OTHER(false);
 
-    private boolean exempt;
+    private final boolean exempt;
 }

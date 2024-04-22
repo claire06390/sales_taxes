@@ -6,17 +6,13 @@ import com.example.sales_taxes.service.PurchaseParserService;
 import com.example.sales_taxes.service.ReceiptService;
 import com.example.sales_taxes.utils.CategoryEnum;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.sales_taxes.utils.Constant.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 

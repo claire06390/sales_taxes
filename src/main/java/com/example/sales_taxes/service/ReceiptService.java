@@ -3,7 +3,6 @@ package com.example.sales_taxes.service;
 import com.example.sales_taxes.dto.PurchaseItem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
